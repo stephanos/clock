@@ -4,12 +4,15 @@ import "time"
 
 type realClock struct{}
 
-// Real is a Clock that wraps the behaviour of the time package.
-// It can not be manipulated.
-var Real Clock
+var real Clock
 
 func init() {
-	Real = &realClock{}
+	real = &realClock{}
+}
+
+// New returns a new Clock that wraps the behaviour of the time package.
+func New() Clock {
+	return real
 }
 
 func (*realClock) Now() time.Time {
@@ -31,4 +34,3 @@ func (*realClock) Ticker(d time.Duration) *time.Ticker {
 func (*realClock) After(d time.Duration) <-chan time.Time {
 	return time.After(d)
 }
-
