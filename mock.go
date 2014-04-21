@@ -15,7 +15,7 @@ type mock struct {
 	sleepMutex sync.Mutex
 }
 
-// NewMock returns a new Mock.
+// NewMock returns a new manipulable Clock.
 func NewMock() Mock {
 	return &mock{
 		base:  time.Now(),

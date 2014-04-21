@@ -2,7 +2,7 @@ package clock
 
 import "time"
 
-// Clock provides the time.
+// Clock provides the functions from the time package.
 type Clock interface {
 
 	// Now returns the current local time.
@@ -16,7 +16,8 @@ type Clock interface {
 	// on the returned channel. It is equivalent to NewTimer(d).C.
 	After(d time.Duration) <-chan time.Time
 
-	// Tick
+	// Tick is a convenience wrapper for NewTicker providing access to the
+	// ticking channel only.
 	Tick(d time.Duration) <-chan time.Time
 
 	// Ticker returns a new Ticker containing a channel that will send the
