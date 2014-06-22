@@ -3,11 +3,14 @@ clock [![Build Status](https://secure.travis-ci.org/101loops/clock.png)](https:/
 
 This Go package provides a `Clock` that returns the time; and can be mocked.
 
-### Installation
-`go get github.com/101loops/clock`
 
-### Documentation
+## Install
+```bash
+go get github.com/101loops/clock
+```
+
+## Documentation
 [godoc.org](http://godoc.org/github.com/101loops/clock)
 
-### License
+## License
 MIT (see LICENSE).
