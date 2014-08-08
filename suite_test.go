@@ -19,6 +19,10 @@ func now() time.Time {
 	return time.Now()
 }
 
+func timeDiff(c Clock) time.Duration {
+	return time.Now().Sub(c.Now())
+}
+
 func durationOf(fn func()) time.Duration {
 	beforeSleep := now()
 	fn()
