@@ -33,10 +33,11 @@ var _ = Describe("Mock Clock", func() {
 	It("freezes", func() {
 		clock := NewMock().Add(1 * time.Hour).Freeze()
 		Check(clock.IsFrozen(), IsTrue)
+		clockNow := clock.Now()
 
 		time.Sleep(delay)
 
-		Check(timeDiff(clock), IsRoughly, -1*time.Hour, threshold)
+		Check(clock.Now(), IsSameTimeAs, clockNow)
 	})
 
 	It("freezes at passed-in time", func() {
@@ -49,14 +50,14 @@ var _ = Describe("Mock Clock", func() {
 	})
 
 	It("unfreezes", func() {
-		clock := NewMock().Freeze()
+		clock := NewMock().Add(1 * time.Hour).Freeze()
 		Check(clock.IsFrozen(), IsTrue)
 
 		time.Sleep(delay)
 
 		clock.Unfreeze()
 		Check(clock.IsFrozen(), IsFalse)
-		Check(timeDiff(clock), IsRoughly, delay, threshold)
+		Check(timeDiff(clock), IsRoughly, -1*time.Hour+delay, threshold)
 	})
 
 	It("can sleep", func() {

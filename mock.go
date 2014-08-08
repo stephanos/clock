@@ -54,7 +54,7 @@ func (c *mock) Add(d time.Duration) Mock {
 }
 
 func (c *mock) Freeze() Mock {
-	return c.FreezeAt(time.Now())
+	return c.FreezeAt(c.Now())
 }
 
 func (c *mock) IsFrozen() bool {
