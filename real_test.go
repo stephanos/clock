@@ -6,28 +6,28 @@ var _ = Describe("Real Clock", func() {
 
 	var clock = New()
 
-	Context("Now()", func() {
+	It("Now()", func() {
 		clockNow := clock.Now()
 		Check(clockNow.Sub(now()), IsLessThan, delay)
 	})
 
-	Context("Sleep()", func() {
+	It("Sleep()", func() {
 		slept := durationOf(func() { clock.Sleep(delay) })
 		Check(slept, IsRoughly, delay, threshold)
 	})
 
-	Context("After()", func() {
+	It("After()", func() {
 		elapsed := durationOf(func() { <-clock.After(delay) })
 		Check(elapsed, IsRoughly, delay, threshold)
 	})
 
-	Context("Ticker()", func() {
+	It("Ticker()", func() {
 		ticker := clock.Ticker(delay).C
 		elapsed := durationOf(func() { <-ticker; <-ticker })
 		Check(elapsed, IsRoughly, 2*delay, threshold)
 	})
 
-	Context("Tick()", func() {
+	It("Tick()", func() {
 		elapsed := durationOf(func() { <-clock.Tick(delay); <-clock.Tick(delay) })
 		Check(elapsed, IsRoughly, 2*delay, threshold)
 	})
