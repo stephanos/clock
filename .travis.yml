@@ -3,14 +3,14 @@ go:
   - 1.2
   - 1.3
 
-before_script:
-  - go get -u github.com/mattn/goveralls
-  - go get -u code.google.com/p/go.tools/cmd/cover
-
 install:
   - go get -v -t ./...
+  - go get -u code.google.com/p/go.tools/cmd/cover
 
 script:
   - go build
   - go test -v -covermode=count -coverprofile=profile.cov ./...
+
+after_success:
+  - go get -u github.com/mattn/goveralls
   - ~/gopath/bin/goveralls -coverprofile=profile.cov -service=travis-ci
