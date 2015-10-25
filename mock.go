@@ -101,13 +101,14 @@ func (c *mock) ResetSleep() Mock {
 }
 
 func (c *mock) Sleep(d time.Duration) {
-	defer c.sleepMutex.Unlock()
 	c.sleepMutex.Lock()
+	override := c.sleep
+	c.sleepMutex.Unlock()
 
-	if c.sleep == -1 {
+	if override == -1 {
 		time.Sleep(d)
 	} else {
-		time.Sleep(c.sleep)
+		time.Sleep(override)
 	}
 }
 
