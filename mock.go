@@ -49,7 +49,11 @@ func (c *mock) Add(d time.Duration) Mock {
 	c.timeMutex.Lock()
 
 	c.base = c.base.Add(d)
-	c.setAt = time.Now()
+	if c.frozen {
+		c.setAt = c.setAt.Add(d)
+	} else {
+		c.setAt = time.Now()
+	}
 	return c
 }
 

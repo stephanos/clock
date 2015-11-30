@@ -1,8 +1,8 @@
 package clock
 
 import (
-	"time"
 	. "github.com/101loops/bdd"
+	"time"
 )
 
 var (
@@ -25,8 +25,14 @@ var _ = Describe("Mock Clock", func() {
 		Check(clock.Now().Sub(fixedTime), IsRoughly, delay, threshold)
 	})
 
-	It("adds time", func() {
+	It("adds time when not frozen", func() {
 		clock := NewMock().Add(1 * time.Hour)
+		Check(timeDiff(clock), IsRoughly, -1*time.Hour, threshold)
+	})
+
+	It("adds time when frozen", func() {
+		clock := NewMock().Freeze()
+		clock.Add(1 * time.Hour)
 		Check(timeDiff(clock), IsRoughly, -1*time.Hour, threshold)
 	})
 
