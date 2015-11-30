@@ -1,9 +1,9 @@
 package clock
 
 import (
+	. "github.com/101loops/bdd"
 	"testing"
 	"time"
-	. "github.com/101loops/bdd"
 )
 
 var (
